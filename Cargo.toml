@@ -15,6 +15,7 @@ qt_3d_input = "0.3.0"
 qt_3d_logic = "0.3.0"
 qt_3d_extras = "0.3.0"
 qt_charts = "0.3.0"
+qt_qml = "0.3.0"
 
 [patch.crates-io]
 qt_core = { path = "../../qt_workspace/out/qt_core" }
@@ -27,4 +28,4 @@ qt_3d_input = { path = "../../qt_workspace/out/qt_3d_input" }
 qt_3d_logic = { path = "../../qt_workspace/out/qt_3d_logic" }
 qt_3d_extras = { path = "../../qt_workspace/out/qt_3d_extras" }
 qt_charts = { path = "../../qt_workspace/out/qt_charts" }
-
+qt_qml = { path = "../../qt_workspace/out/qt_qml" }

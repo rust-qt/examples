@@ -16,7 +16,7 @@ fn main() {
         chart.add_series(&mut series);
         chart.create_default_axes();
 
-        let mut chart_view = QChartView::from_q_chart(&mut chart);
+        let mut chart_view = QChartView::from_q_chart(chart.into_ptr());
         chart_view.set_window_title(&QString::from_std_str("Charts example"));
         chart_view.resize_2a(400, 300);
         chart_view.show();

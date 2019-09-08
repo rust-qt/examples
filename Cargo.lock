@@ -60,7 +60,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "cpp_utils"
-version = "0.2.1"
+version = "0.3.0"
 
 [[package]]
 name = "either"
@@ -165,67 +165,67 @@ dependencies = [
 name = "qt_3d_core"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
+ "cpp_utils 0.3.0",
  "qt_core 0.3.0",
  "qt_gui 0.3.0",
- "qt_ritual_build 0.0.0",
+ "qt_ritual_build 0.1.0",
 ]
 
 [[package]]
 name = "qt_3d_extras"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
+ "cpp_utils 0.3.0",
  "qt_3d_core 0.3.0",
  "qt_3d_input 0.3.0",
  "qt_3d_logic 0.3.0",
  "qt_3d_render 0.3.0",
  "qt_core 0.3.0",
  "qt_gui 0.3.0",
- "qt_ritual_build 0.0.0",
+ "qt_ritual_build 0.1.0",
 ]
 
 [[package]]
 name = "qt_3d_input"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
+ "cpp_utils 0.3.0",
  "qt_3d_core 0.3.0",
  "qt_core 0.3.0",
  "qt_gui 0.3.0",
- "qt_ritual_build 0.0.0",
+ "qt_ritual_build 0.1.0",
 ]
 
 [[package]]
 name = "qt_3d_logic"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
+ "cpp_utils 0.3.0",
  "qt_3d_core 0.3.0",
  "qt_core 0.3.0",
  "qt_gui 0.3.0",
- "qt_ritual_build 0.0.0",
+ "qt_ritual_build 0.1.0",
 ]
 
 [[package]]
 name = "qt_3d_render"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
+ "cpp_utils 0.3.0",
  "qt_3d_core 0.3.0",
  "qt_core 0.3.0",
  "qt_gui 0.3.0",
- "qt_ritual_build 0.0.0",
+ "qt_ritual_build 0.1.0",
 ]
 
 [[package]]
 name = "qt_charts"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
+ "cpp_utils 0.3.0",
  "qt_core 0.3.0",
  "qt_gui 0.3.0",
- "qt_ritual_build 0.0.0",
+ "qt_ritual_build 0.1.0",
  "qt_widgets 0.3.0",
 ]
 
@@ -233,26 +233,36 @@ dependencies = [
 name = "qt_core"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
- "qt_ritual_build 0.0.0",
+ "cpp_utils 0.3.0",
+ "qt_ritual_build 0.1.0",
 ]
 
 [[package]]
 name = "qt_gui"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
+ "cpp_utils 0.3.0",
  "qt_core 0.3.0",
- "qt_ritual_build 0.0.0",
+ "qt_ritual_build 0.1.0",
+]
+
+[[package]]
+name = "qt_qml"
+version = "0.3.0"
+dependencies = [
+ "cpp_utils 0.3.0",
+ "qt_core 0.3.0",
+ "qt_gui 0.3.0",
+ "qt_ritual_build 0.1.0",
 ]
 
 [[package]]
 name = "qt_ritual_build"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "itertools 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "qt_ritual_common 0.0.0",
- "ritual_build 0.0.0",
+ "ritual_build 0.1.0",
  "semver 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -261,7 +271,7 @@ name = "qt_ritual_common"
 version = "0.0.0"
 dependencies = [
  "log 0.4.8 (registry+https://github.com/rust-lang/crates.io-index)",
- "ritual_common 0.0.0",
+ "ritual_common 0.1.0",
  "semver 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -269,10 +279,10 @@ dependencies = [
 name = "qt_ui_tools"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
+ "cpp_utils 0.3.0",
  "qt_core 0.3.0",
  "qt_gui 0.3.0",
- "qt_ritual_build 0.0.0",
+ "qt_ritual_build 0.1.0",
  "qt_widgets 0.3.0",
 ]
 
@@ -280,10 +290,10 @@ dependencies = [
 name = "qt_widgets"
 version = "0.3.0"
 dependencies = [
- "cpp_utils 0.2.1",
+ "cpp_utils 0.3.0",
  "qt_core 0.3.0",
  "qt_gui 0.3.0",
- "qt_ritual_build 0.0.0",
+ "qt_ritual_build 0.1.0",
 ]
 
 [[package]]
@@ -320,15 +330,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "ritual_build"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "log 0.4.8 (registry+https://github.com/rust-lang/crates.io-index)",
- "ritual_common 0.0.0",
+ "ritual_common 0.1.0",
 ]
 
 [[package]]
 name = "ritual_common"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "bincode 1.1.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "failure 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -358,6 +368,7 @@ dependencies = [
  "qt_charts 0.3.0",
  "qt_core 0.3.0",
  "qt_gui 0.3.0",
+ "qt_qml 0.3.0",
  "qt_ui_tools 0.3.0",
  "qt_widgets 0.3.0",
 ]
