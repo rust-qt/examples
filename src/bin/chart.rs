@@ -13,7 +13,7 @@ fn main() {
         series.append_2_double(7.0, 1.0);
 
         let mut chart = QChart::new_0a();
-        chart.add_series(&mut series);
+        chart.add_series(series.into_ptr());
         chart.create_default_axes();
 
         let mut chart_view = QChartView::from_q_chart(chart.into_ptr());
