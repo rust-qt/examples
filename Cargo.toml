@@ -16,3 +16,10 @@ qt_3d_logic = "0.3.0"
 qt_3d_extras = "0.3.0"
 qt_charts = "0.3.0"
 qt_qml = "0.3.0"
+
+[patch.crates-io.ritual_build]
+git = "https://github.com/rust-qt/ritual.git"
+branch = "use-libcpp-on-macos"
+[patch.crates-io.ritual_common]
+git = "https://github.com/rust-qt/ritual.git"
+branch = "use-libcpp-on-macos"
