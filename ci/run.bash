@@ -5,16 +5,15 @@ set -x
 
 export RUST_BACKTRACE=1
 
+if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+    choco install python3
+fi
 python3 --version
+python --version
 
 wget https://raw.githubusercontent.com/rust-qt/ritual/37cc01f27e2525fb9f6d5882f447089e2ad5d4bf/scripts/install_qt.py -O /tmp/install_qt.py
 
-pyenv install --list
-pyenv install 3.6.3
-pyenv global 3.6.3
-python --version
-
-pip install bs4
+pip3 install bs4 lxml
 
 mkdir ~/qt
 cd ~/qt
@@ -33,7 +32,7 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
     QT_SUBDIR=msvc2017_64
 fi
 
-python /tmp/install_qt.py $QT_VERSION $QT_OS $QT_COMPILER
+python3 /tmp/install_qt.py $QT_VERSION $QT_OS $QT_COMPILER
 QT_DIR=~/qt/$QT_VERSION/$QT_SUBDIR
 
 export PATH=$QT_DIR/bin:$PATH
