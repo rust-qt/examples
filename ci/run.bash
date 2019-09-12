@@ -19,6 +19,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     QT_COMPILER=clang_64
     QT_SUBDIR=$QT_COMPILER
 elif [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    sudo apt-get update
     sudo apt-get -y install python3-pip p7zip
 
     PYTHON=python3
