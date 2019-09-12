@@ -1,16 +1,18 @@
 __common: &common
-    language: minimal
-    script: ci/run.bash
+    language: rust
+    rust: 1.36.0
+    script: scripts/travis/run.bash
     cache:
         directories:
-        - target
+            - target
+            - $HOME/ritual_temp_test_dir/test_full_run/workspace/target
 
 matrix:
     include:
-    -   <<: *common
-        os: linux
-        dist: trusty
-    -   <<: *common
-        os: osx
-    -   <<: *common
-        os: windows
+        -   <<: *common
+            os: linux
+            dist: trusty
+#    -   <<: *common
+#        os: osx
+#    -   <<: *common
+#        os: windows
