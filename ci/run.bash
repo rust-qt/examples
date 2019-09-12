@@ -10,7 +10,7 @@ rustup component add rustfmt
 
 cargo fmt -- --check
 
-wget https://raw.githubusercontent.com/rust-qt/ritual/37cc01f27e2525fb9f6d5882f447089e2ad5d4bf/scripts/install_qt.py -O /tmp/install_qt.py
+wget https://raw.githubusercontent.com/rust-qt/ritual/59e0338ec4feda8aaddea11271470e86204b323a/scripts/install_qt.py -O /tmp/install_qt.py
 
 mkdir ~/qt
 cd ~/qt
