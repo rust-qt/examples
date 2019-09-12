@@ -5,6 +5,8 @@ set -x
 
 export RUST_BACKTRACE=1
 
+python3 --version
+
 wget https://raw.githubusercontent.com/rust-qt/ritual/37cc01f27e2525fb9f6d5882f447089e2ad5d4bf/scripts/install_qt.py -O /tmp/install_qt.py
 
 pyenv install --list
