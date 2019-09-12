@@ -37,7 +37,7 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
 fi
 
 $PYTHON --version
-pip3 install bs4 lxml
+pip3 install 'bs4==0.0.1' 'lxml<4.4'
 
 $PYTHON /tmp/install_qt.py $QT_VERSION $QT_OS $QT_COMPILER
 
