@@ -27,7 +27,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     QT_SUBDIR=$QT_COMPILER
 elif [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     sudo apt-get update
-    sudo apt-get -y install python3-pip p7zip-full
+    sudo apt-get -y install python3-pip p7zip-full libegl1-mesa mesa-common-dev
 
     PYTHON=python3
     PIP=pip3
