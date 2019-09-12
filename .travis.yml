@@ -1,7 +1,7 @@
 __common: &common
     language: rust
     rust: 1.36.0
-    script:ci/run.bash
+    script: ci/run.bash
     cache:
         directories:
         - target
