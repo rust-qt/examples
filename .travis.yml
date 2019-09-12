@@ -1,5 +1,6 @@
 __common: &common
-    language: minimal
+    language: rust
+    rust: 1.36.0
     script: ci/run.bash
     cache:
         directories:
@@ -11,7 +12,7 @@ matrix:
         -   <<: *common
             os: linux
             dist: trusty
-#    -   <<: *common
-#        os: osx
-#    -   <<: *common
-#        os: windows
+        -   <<: *common
+            os: osx
+        -   <<: *common
+            os: windows
