@@ -1,6 +1,5 @@
 __common: &common
-    language: rust
-    rust: 1.36.0
+    language: minimal
     script: ci/run.bash
     cache:
         directories:
