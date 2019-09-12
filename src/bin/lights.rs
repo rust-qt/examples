@@ -9,6 +9,8 @@ use qt_gui::{
 };
 use std::cell::*;
 
+// false positive, see https://github.com/rust-lang/rust-clippy/issues/4384
+#[allow(clippy::clone_on_copy)]
 fn setup_scene(root: MutPtr<QEntity>) -> Box<Fn() -> ()> {
     unsafe {
         let mut scene = QEntity::new_1a(root);

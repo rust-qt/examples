@@ -5,6 +5,10 @@ set -x
 
 export RUST_BACKTRACE=1
 
+rustup component add clippy
+rustup component add rustfmt
+
+cargo fmt -- --check
 
 wget https://raw.githubusercontent.com/rust-qt/ritual/37cc01f27e2525fb9f6d5882f447089e2ad5d4bf/scripts/install_qt.py -O /tmp/install_qt.py
 
@@ -15,6 +19,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew install p7zip
 
     PYTHON=python3
+    PIP=pip3
     QT_OS=mac_x64
     QT_COMPILER=clang_64
     QT_SUBDIR=$QT_COMPILER
@@ -23,6 +28,7 @@ elif [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     sudo apt-get -y install python3-pip p7zip
 
     PYTHON=python3
+    PIP=sudo pip3
     QT_OS=linux_x64
     QT_COMPILER=gcc_64
     QT_SUBDIR=$QT_COMPILER
@@ -31,13 +37,14 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
     export PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
     PYTHON=python
+    PIP=pip
     QT_OS=windows_x86
     QT_COMPILER=win64_msvc2017_64
     QT_SUBDIR=msvc2017_64
 fi
 
 $PYTHON --version
-pip3 install 'bs4==0.0.1' 'lxml<4.4'
+$PIP install 'bs4==0.0.1' 'lxml<4.4'
 
 $PYTHON /tmp/install_qt.py $QT_VERSION $QT_OS $QT_COMPILER
 
@@ -53,8 +60,20 @@ qmake -query
 
 cd "$TRAVIS_BUILD_DIR"
 
-if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 && cargo build --all-targets -v'
-else
-    cargo build --all-targets -v
-fi
+function build() {
+    if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+        COMMAND="$@"
+        cmd.exe /C "\"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat\" amd64 && $COMMAND"
+    else
+        "$@"
+    fi
+}
+
+build cargo clippy --color=always --all-targets -- -D warnings
+
+build cargo test --color=always -p qt_core -p qt_gui -p qt_widgets -p qt_ui_tools -p qt_3d_core -p qt_3d_render -p qt_3d_input -p qt_3d_logic -p qt_3d_extras -p qt_charts -p qt_qml
+
+build cargo build --color=always --all-targets -v
+
+ARGS=*
+build cargo run --color=always --bin mime_types -- $ARGS
