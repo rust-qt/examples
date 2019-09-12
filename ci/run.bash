@@ -7,9 +7,9 @@ export RUST_BACKTRACE=1
 
 wget https://raw.githubusercontent.com/rust-qt/ritual/37cc01f27e2525fb9f6d5882f447089e2ad5d4bf/scripts/install_qt.py -O /tmp/install_qt.py
 
-pyenv install 3.7
+pyenv install 3.7.4
 pyenv versions
-pyenv global 3.7
+pyenv global 3.7.4
 python --version
 pip install bs4
 
