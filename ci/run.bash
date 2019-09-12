@@ -21,6 +21,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     PYTHON=python3
     PIP=pip3
     PIP_SUDO=
+    XVFB=
     QT_OS=mac_x64
     QT_COMPILER=clang_64
     QT_SUBDIR=$QT_COMPILER
@@ -31,6 +32,7 @@ elif [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     PYTHON=python3
     PIP=pip3
     PIP_SUDO=sudo
+    XVFB="xvfb-run -a"
     QT_OS=linux_x64
     QT_COMPILER=gcc_64
     QT_SUBDIR=$QT_COMPILER
@@ -41,6 +43,7 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
     PYTHON=python
     PIP=pip
     PIP_SUDO=
+    XVFB=
     QT_OS=windows_x86
     QT_COMPILER=win64_msvc2017_64
     QT_SUBDIR=msvc2017_64
@@ -74,9 +77,9 @@ function build() {
 
 build cargo clippy --color=always --all-targets -- -D warnings
 
-build cargo test --color=always -p qt_core -p qt_gui -p qt_widgets -p qt_ui_tools -p qt_3d_core -p qt_3d_render -p qt_3d_input -p qt_3d_logic -p qt_3d_extras -p qt_charts -p qt_qml
+build $XVFB cargo test --color=always -p qt_core -p qt_gui -p qt_widgets -p qt_ui_tools -p qt_3d_core -p qt_3d_render -p qt_3d_input -p qt_3d_logic -p qt_3d_extras -p qt_charts -p qt_qml
 
-build cargo build --color=always --all-targets -v
+build $XVFB cargo build --color=always --all-targets -v
 
 ARGS=*
-build cargo run --color=always --bin mime_types -- $ARGS
+build $XVFB cargo run --color=always --bin mime_types -- $ARGS
