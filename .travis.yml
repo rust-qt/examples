@@ -1,6 +1,6 @@
 __common: &common
     language: minimal
-    script: scripts/travis/run.bash
+    script: ci/run.bash
     cache:
         directories:
             - target
