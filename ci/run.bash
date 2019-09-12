@@ -28,7 +28,7 @@ elif [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     sudo apt-get -y install python3-pip p7zip
 
     PYTHON=python3
-    PIP=sudo pip3
+    PIP='sudo pip3'
     QT_OS=linux_x64
     QT_COMPILER=gcc_64
     QT_SUBDIR=$QT_COMPILER
@@ -44,7 +44,7 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
 fi
 
 $PYTHON --version
-$PIP install 'bs4==0.0.1' 'lxml<4.4'
+eval $PIP install 'bs4==0.0.1' 'lxml<4.4'
 
 $PYTHON /tmp/install_qt.py $QT_VERSION $QT_OS $QT_COMPILER
 
