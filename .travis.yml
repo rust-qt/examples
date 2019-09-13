@@ -1,18 +1,14 @@
-__common: &common
-    language: rust
-    rust: 1.36.0
-    script: ci/run.bash
-    cache:
-        directories:
-            - target
-            - $HOME/ritual_temp_test_dir/test_full_run/workspace/target
+language: rust
+rust: 1.36.0
+script: ci/run.bash
+cache:
+    directories:
+        - target
+        - $HOME/ritual_temp_test_dir/test_full_run/workspace/target
 
 matrix:
     include:
-        -   <<: *common
-            os: linux
-            dist: bionic
-        -   <<: *common
-            os: osx
-        -   <<: *common
-            os: windows
+        - os: linux
+          dist: bionic
+        - os: osx
+        - os: windows

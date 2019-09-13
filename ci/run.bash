@@ -27,9 +27,8 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     QT_SUBDIR=$QT_COMPILER
 elif [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     sudo apt-get update
-    sudo apt-get -y install python3-pip python3-setuptools xvfb p7zip-full libxkbcommon-x11-0 libegl1-mesa mesa-common-dev
-    export QT_DEBUG_PLUGINS=1
-
+    sudo apt-get -y install python3-pip python3-setuptools xvfb p7zip-full libxkbcommon-x11-0
+    
     PYTHON=python3
     PIP=pip3
     PIP_SUDO=sudo
