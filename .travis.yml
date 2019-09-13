@@ -8,7 +8,31 @@ cache:
 
 matrix:
     include:
-        - os: linux
-          dist: bionic
-        - os: osx
-        - os: windows
+        -   os: linux
+            dist: bionic
+            env: QT_VERSION=5.9.7
+        -   os: osx
+            env: QT_VERSION=5.9.7
+        -   os: windows
+            env: QT_VERSION=5.9.7
+        -   os: linux
+            dist: bionic
+            env: QT_VERSION=5.11.3
+        -   os: osx
+            env: QT_VERSION=5.11.3
+        -   os: windows
+            env: QT_VERSION=5.11.3
+        -   os: linux
+            dist: bionic
+            env: QT_VERSION=5.12.2
+        -   os: osx
+            env: QT_VERSION=5.12.2
+        -   os: windows
+            env: QT_VERSION=5.12.2
+        -   os: linux
+            dist: bionic
+            env: QT_VERSION=5.13.0
+        -   os: osx
+            env: QT_VERSION=5.13.0
+        -   os: windows
+            env: QT_VERSION=5.13.0
