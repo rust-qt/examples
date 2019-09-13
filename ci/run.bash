@@ -10,7 +10,7 @@ rustup component add rustfmt
 
 cargo fmt -- --check
 
-wget https://raw.githubusercontent.com/rust-qt/ritual/59e0338ec4feda8aaddea11271470e86204b323a/scripts/install_qt.py -O /tmp/install_qt.py
+wget https://raw.githubusercontent.com/rust-qt/ritual/0ea3925d8cda60b6485e542802ef581d8d08af44/scripts/install_qt.py -O /tmp/install_qt.py
 
 mkdir ~/qt
 cd ~/qt
@@ -50,7 +50,7 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
 fi
 
 $PYTHON --version
-$PIP_SUDO $PIP install 'bs4==0.0.1' 'lxml<4.4'
+$PIP_SUDO $PIP install 'bs4==0.0.1' 'lxml=4.4.1'
 
 $PYTHON /tmp/install_qt.py $QT_VERSION $QT_OS $QT_COMPILER
 

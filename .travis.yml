@@ -11,7 +11,7 @@ matrix:
     include:
         -   <<: *common
             os: linux
-            dist: trusty
+            dist: bionic
         -   <<: *common
             os: osx
         -   <<: *common
