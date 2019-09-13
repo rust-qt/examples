@@ -14,7 +14,7 @@ wget https://raw.githubusercontent.com/rust-qt/ritual/0ea3925d8cda60b6485e542802
 
 mkdir ~/qt
 cd ~/qt
-QT_VERSION=5.13.0
+
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew install p7zip
 
