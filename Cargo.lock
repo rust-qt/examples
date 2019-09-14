@@ -246,6 +246,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "qt_examples"
+version = "0.0.0"
+dependencies = [
+ "qt_3d_core 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_3d_extras 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_3d_input 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_3d_logic 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_3d_render 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_charts 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_core 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_gui 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_qml 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_ui_tools 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "qt_widgets 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "qt_gui"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -370,23 +387,6 @@ dependencies = [
  "serde_json 1.0.40 (registry+https://github.com/rust-lang/crates.io-index)",
  "term-painter 0.2.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "toml 0.4.10 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "rust_qt_examples"
-version = "0.0.0"
-dependencies = [
- "qt_3d_core 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_3d_extras 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_3d_input 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_3d_logic 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_3d_render 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_charts 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_core 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_gui 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_qml 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_ui_tools 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "qt_widgets 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]

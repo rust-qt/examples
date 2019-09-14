@@ -20,11 +20,10 @@ impl<'a> Form<'a> {
             let mut widget = CppBox::new(ui_loader.load_1a(&mut buffer)).expect("load failed");
             widget.show();
 
-            let form = Form {
+            Form {
                 _widget: widget,
                 _check_box_toggled: Slot::new(move || {}),
-            };
-            form
+            }
         }
     }
 }
