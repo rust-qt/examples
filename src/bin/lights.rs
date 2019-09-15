@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use qt_3d_core::cpp_utils::*;
 use qt_3d_core::*;
 use qt_3d_extras::*;

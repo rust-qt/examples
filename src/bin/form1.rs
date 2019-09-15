@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use qt_widgets::{
     cpp_utils::{CppBox, MutPtr},
     qt_core::QString,

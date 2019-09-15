@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use qt_ui_tools::{
     cpp_utils::CppBox,
     qt_core::{QBuffer, QByteArray, Slot},

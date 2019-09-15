@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use qt_charts::{QChart, QChartView, QLineSeries};
 use qt_core::QString;
 use qt_widgets::QApplication;

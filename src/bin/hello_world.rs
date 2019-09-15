@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use qt_core::{q_debug, QCoreApplication, QString};
 
 fn main() {

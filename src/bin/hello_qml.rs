@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use qt_core::QString;
 use qt_gui::QGuiApplication;
 use qt_qml::QQmlApplicationEngine;
