@@ -54,6 +54,16 @@ make
 ./standarddialogs
 ```
 
+On macOS:
+```
+cd /tmp
+mkdir build
+cd build
+qmake ~/Qt/Examples/Qt-5.13.0/widgets/dialogs/standarddialogs
+make
+open standarddialogs.app
+```
+
 On Windows (in the VS command prompt):
 ```
 cd C:\tmp
