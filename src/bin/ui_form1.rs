@@ -1,7 +1,7 @@
 #![windows_subsystem = "windows"]
 
 use qt_ui_tools::{
-    cpp_utils::CppBox,
+    cpp_core::CppBox,
     qt_core::{QBuffer, QByteArray, Slot},
     qt_widgets::{QApplication, QWidget},
     QUiLoader,

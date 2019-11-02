@@ -1,6 +1,6 @@
 #![windows_subsystem = "windows"]
 
-use qt_3d_core::cpp_utils::*;
+use qt_3d_core::cpp_core::*;
 use qt_3d_core::*;
 use qt_3d_extras::*;
 use qt_3d_input::*;
@@ -13,7 +13,7 @@ use std::cell::*;
 
 // false positive, see https://github.com/rust-lang/rust-clippy/issues/4384
 #[allow(clippy::clone_on_copy)]
-fn setup_scene(root: MutPtr<QEntity>) -> Box<Fn() -> ()> {
+fn setup_scene(root: MutPtr<QEntity>) -> Box<dyn Fn() -> ()> {
     unsafe {
         let mut scene = QEntity::new_1a(root);
 

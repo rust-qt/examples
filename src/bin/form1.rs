@@ -1,7 +1,7 @@
 #![windows_subsystem = "windows"]
 
 use qt_widgets::{
-    cpp_utils::{CppBox, MutPtr},
+    cpp_core::{CppBox, MutPtr},
     qt_core::QString,
     qt_core::Slot,
     QApplication, QLineEdit, QMessageBox, QPushButton, QVBoxLayout, QWidget,
