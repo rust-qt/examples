@@ -16,6 +16,7 @@ mkdir ~/qt
 cd ~/qt
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    export HOMEBREW_NO_AUTO_UPDATE=1
     brew install p7zip
 
     PYTHON=python3
@@ -37,7 +38,8 @@ elif [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     QT_COMPILER=gcc_64
     QT_SUBDIR=$QT_COMPILER
 elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-    choco install -y python3 7zip
+    choco install -y python --version=3.7.0
+    choco install -y 7zip
     export PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
     PYTHON=python
