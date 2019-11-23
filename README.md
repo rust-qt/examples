@@ -2,11 +2,33 @@
 
 [![Build Status](https://travis-ci.com/rust-qt/examples.svg?branch=master)](https://travis-ci.com/rust-qt/examples)
 
-## Setting up build environment
+This repository contains examples of using Qt from Rust. This readme is also a beginner's guide.
+
+Qt crates are generated with [ritual](https://github.com/rust-qt/ritual). This project maintains the following Qt crates (more crates may be added in the future):
+
+| Crate       | Version | Docs |
+| ----------- | ------- | ---- |
+| qt_core     | [![](http://meritbadge.herokuapp.com/qt_core)](https://crates.io/crates/qt_core) | [![](https://docs.rs/qt_core/badge.svg)](https://docs.rs/qt_core) |
+| qt_gui      | [![](http://meritbadge.herokuapp.com/qt_gui)](https://crates.io/crates/qt_gui) | [![](https://docs.rs/qt_gui/badge.svg)](https://docs.rs/qt_gui) |
+| qt_widgets  | [![](http://meritbadge.herokuapp.com/qt_widgets)](https://crates.io/crates/qt_widgets) | [![](https://docs.rs/qt_widgets/badge.svg)](https://docs.rs/qt_widgets) |
+| qt_ui_tools | [![](http://meritbadge.herokuapp.com/qt_ui_tools)](https://crates.io/crates/qt_ui_tools) | [![](https://docs.rs/qt_ui_tools/badge.svg)](https://docs.rs/qt_ui_tools) |
+| qt_3d_core | [![](http://meritbadge.herokuapp.com/qt_3d_core)](https://crates.io/crates/qt_3d_core) | [![](https://docs.rs/qt_3d_core/badge.svg)](https://docs.rs/qt_3d_core) |
+| qt_3d_render | [![](http://meritbadge.herokuapp.com/qt_3d_render)](https://crates.io/crates/qt_3d_render) | [![](https://docs.rs/qt_3d_render/badge.svg)](https://docs.rs/qt_3d_render) |
+| qt_3d_input | [![](http://meritbadge.herokuapp.com/qt_3d_input)](https://crates.io/crates/qt_3d_input) | [![](https://docs.rs/qt_3d_input/badge.svg)](https://docs.rs/qt_3d_input) |
+| qt_3d_logic | [![](http://meritbadge.herokuapp.com/qt_3d_logic)](https://crates.io/crates/qt_3d_logic) | [![](https://docs.rs/qt_3d_logic/badge.svg)](https://docs.rs/qt_3d_logic) |
+| qt_3d_extras | [![](http://meritbadge.herokuapp.com/qt_3d_extras)](https://crates.io/crates/qt_3d_extras) | [![](https://docs.rs/qt_3d_extras/badge.svg)](https://docs.rs/qt_3d_extras) |
+| qt_charts | [![](http://meritbadge.herokuapp.com/qt_charts)](https://crates.io/crates/qt_charts) | [![](https://docs.rs/qt_charts/badge.svg)](https://docs.rs/qt_charts) |
+| qt_qml | [![](http://meritbadge.herokuapp.com/qt_qml)](https://crates.io/crates/qt_qml) | [![](https://docs.rs/qt_qml/badge.svg)](https://docs.rs/qt_qml) |
+
+Supported environments: 64-bit Linux, 64-bit Windows (msvc toolchain), 64-bit macOS.
+
+Supported Qt versions: from 5.9 to 5.13.
+
+# Setting up build environment
 
 In addition to Rust's own build tools, you'll need to set up a C++ compiler, Qt, and CMake.
 
-### C++ compiler
+## C++ compiler
 
 On Linux, install `gcc` from the repository.
 
@@ -16,7 +38,7 @@ Visual Studio will create a starting menu option (e.g. `x64 Native Tools Command
 
 On macOS, install Xcode Command Line Tools. The install can be initiated with the `xcode-select --install` command. You don't need a full Xcode installation.
 
-### Qt
+## Qt
 
 You can install Qt on any OS using the [official installer](https://www.qt.io/download). The installer allows you to select one of multiple available versions and builds. Make sure to select a `Desktop` build, not a mobile OS build. On Windows, also make sure to select a build corresponding to your Visual Studio version (e.g. `MSVC 2017`), not a MinGW build. Select a 64-bit version, not a 32-bit version.
 
@@ -32,7 +54,7 @@ On Windows (in the VS command prompt):
 set PATH=C:\Qt\5.13.0\msvc2017_64\bin;%PATH%
 ```
 
-### CMake
+## CMake
 
 You'll also need `cmake`. On Linux and macOS, install it from the repository (or `brew`). 
 
@@ -40,7 +62,7 @@ On Windows, download the CMake installer at the [official site](https://cmake.or
 
 Run `cmake --version` to verify that `cmake` is available.
 
-### Verifying installation
+## Verifying installation
 
 To check that everything is set up correctly, try to build a C++/Qt project in your environment. If you've installed Qt via the official installer, it will store examples in the `Examples` directory of your Qt installation. You can also find them in the [Qt git repository](https://code.qt.io/cgit/qt/qtbase.git/tree/examples).
 
@@ -74,12 +96,78 @@ nmake
 release\standarddialogs.exe
 ```
 
-Finally, you can try to build the Rust + Qt examples repo:
+Finally, you can try to build the provided examples:
 ```
 cd examples
 cargo run --bin form1
 ```
 
+# Getting started
+
+To use Qt from Rust, add the crates as dependencies to your `Cargo.toml`, for example:
+
+```
+[dependencies]
+qt_widgets = "0.2"
+```
+
+Each crate re-exports its dependencies, so, for example, you can access `qt_core` as `qt_widgets::qt_core` without adding an explicit dependency.
+
+You can look at the examples in this repository to see how to use the API.
+
+# Unsafety
+
+It's impossible to bring Rust's safety to C++ APIs automatically, so most of the generated APIs are unsafe to use and require thinking in C++ terms. Most of the generated functions are unsafe because raw pointers are not guaranteed to be valid, and most functions dereference some pointers.
+
+It's recommended to contain unsafe usage in a module and implement a safe interface for the parts of API required for your project.
+
+You should be careful when working with Qt objects. Qt has its own [ownership system](https://doc.qt.io/qt-5/objecttrees.html) that must be respected. If you retain a pointer to an object owned by another object, it can be deleted and you may produce undefined behavior when trying to access the deleted object.
+
+On the other hand, C++ doesn't require mutable access to be exclusive, so it's "safe" to mutate an object while there are other mutable pointers to it. Smart pointer types provided by ritual allow you to do that conveniently.
+
+# Smart pointers
+
+Smart pointers are provided by the [cpp_core](https://docs.rs/cpp_core/0.5.0/cpp_core/) crate to make working with C++ objects from Rust easier:
+
+- `CppBox`: owned, non-null (corresponds to C++ objects passed by value)
+- `Ptr` and `MutPtr`: possibly owned, possibly null (correspond to C++ pointers)
+- `Ref` and `MutRef`: not owned, non-null (correspond to C++ references)
+
+Unlike Rust references, these pointers can be freely copied, producing multiple mutable pointers to the same object, which is usually necessary to do when working with C++ libraries.
+
+These smart pointers also allow you to use casts, iterators, and operators. 
+
+# Adapters and helpers
+
+Most of the Qt API is translated to Rust as-is (only modified according to Rust's identifier naming convention), so you can address the Qt documentation for information on it. However, Rust crates provide some additional helpers.
+
+Qt application objects (`QApplication`, `QGuiApplication`, `QCoreApplication`) require `argc` and `argv` to be present, and these are not available directly in Rust. Use `init` helpers to initialize the application correctly:
+```
+fn main() {
+    QApplication::init(|app| unsafe {
+        //...
+    })
+}
+```
+
+`qt_core` provides API for using signals and slots conveniently. You can connect built-in signals to built-in slots like this:
+```
+let mut timer = QTimer::new_0a();
+timer.timeout().connect(app.slot_quit());
+```
+
+You can also connect signals to Rust closures (see [form example](src/bin/form1.rs):
+```
+let button_clicked = Slot::new(move || { ... });
+button.clicked().connect(&button_clicked);
+```
+Compatibility of signal's and slot's arguments is checked at compile time.
+
+`QString::from_std_str`, `QString::to_std_string`, `QByteArray::from_slice`, and `impl<'a> From<&'a QString> for String` provide conversions from Qt's types to Rust types and back.
+
+`QFlags` generic type mimics the functionality of C++'s `QFlags` class.
+
+`qdebug` function from `qt_core` wraps a printable (with `QDebug`) Qt object into a shim object that implements Rust's `fmt::Debug`.
 
 # Deployment
 
@@ -140,3 +228,15 @@ for /F %%i in ('dir %OUT_DIR%\*.dll /B /S') do windeployqt %%i
 
 Note that executables produced by Visual Studio depend on Visual C++ Redistributable. `windeployqt` will copy the `vc_redist.x64.exe` installer to your destination directory, and your installer should run that to make sure the proper version of this library is available on the end user's system.
 
+# License
+
+This project is licensed under either of
+
+ * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
+   http://www.apache.org/licenses/LICENSE-2.0)
+ * MIT license ([LICENSE-MIT](LICENSE-MIT) or
+   http://opensource.org/licenses/MIT)
+
+at your option.
+
+You should also take into account [Qt licensing](https://www.qt.io/licensing/).
