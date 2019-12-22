@@ -1,6 +1,7 @@
 use qt_core::QString;
 use qt_widgets::{
-    QApplication, QTableWidget, QTableWidgetItem, SlotOfQTableWidgetItemQTableWidgetItem,
+    QAction, QApplication, QMenu, QTableWidget, QTableWidgetItem,
+    SlotOfQTableWidgetItemQTableWidgetItem,
 };
 
 fn main() {
@@ -32,6 +33,15 @@ fn main() {
         });
         table.current_item_changed().connect(&slot);
         table.show();
+
+        let mut menu = QMenu::new();
+        menu.add_action_q_string(&QString::from_std_str("A1"));
+        menu.add_action_q_string(&QString::from_std_str("A2"));
+
+        let action3 = QAction::from_q_string(&QString::from_std_str("A3")).into_ptr();
+        menu.add_action(action3);
+
+        menu.exec_0a_mut();
 
         QApplication::exec()
     })
