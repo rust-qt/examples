@@ -5,6 +5,9 @@ set -x
 
 export RUST_BACKTRACE=1
 
+# Make sure the correct toolchain is used on Windows.
+echo "$TRAVIS_RUST_VERSION" > rust-toolchain
+
 rustup component add clippy
 rustup component add rustfmt
 
