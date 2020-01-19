@@ -6,7 +6,7 @@ use qt_widgets::{QApplication, QCheckBox, QLabel, QWidget};
 
 struct Form {
     _widget: CppBox<QWidget>,
-    _check_box_toggled: SlotOfBool<'static>,
+    _check_box_toggled: CppBox<SlotOfBool>,
 }
 
 impl Form {
@@ -33,7 +33,7 @@ impl Form {
                 .dynamic_cast_mut::<QLabel>()
                 .expect("widget type mismatch");
 
-            let check_box_toggled = SlotOfBool::new(move |checked| {
+            let check_box_toggled = SlotOfBool::with(move |checked| {
                 let text = if checked { "Checked!" } else { "Unchecked!" };
                 label.set_text(&QString::from_std_str(text));
             });

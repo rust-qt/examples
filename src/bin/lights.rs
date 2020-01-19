@@ -128,7 +128,7 @@ fn main() {
 
             let mut root = QEntity::new_0a();
             let activate_next_light = setup_scene(root.as_mut_ptr());
-            let next_light_slot = Slot::new(activate_next_light.as_ref());
+            let next_light_slot = SlotNoArgs::with(activate_next_light);
 
             let keyboard_device = QKeyboardDevice::new_1a(&mut root);
             let mut handler = QEntity::new_1a(&mut root);

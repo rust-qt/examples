@@ -18,7 +18,7 @@ fn main() {
         item2.set_text(&QString::from_std_str("Item 2"));
         table.set_item(1, 0, item2);
 
-        let slot = SlotOfQTableWidgetItemQTableWidgetItem::new(|mut current, mut previous| {
+        let slot = SlotOfQTableWidgetItemQTableWidgetItem::with(|mut current, mut previous| {
             if !previous.is_null() {
                 let mut font = previous.font();
                 font.set_bold(false);

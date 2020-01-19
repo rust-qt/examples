@@ -3,20 +3,20 @@
 use qt_widgets::{
     cpp_core::{CppBox, MutPtr},
     qt_core::QString,
-    qt_core::Slot,
+    qt_core::SlotNoArgs,
     QApplication, QLineEdit, QMessageBox, QPushButton, QVBoxLayout, QWidget,
 };
 
-struct Form<'a> {
+struct Form {
     _widget: CppBox<QWidget>,
     _button: MutPtr<QPushButton>,
     _line_edit: MutPtr<QLineEdit>,
-    button_clicked: Slot<'a>,
-    line_edit_edited: Slot<'a>,
+    button_clicked: CppBox<SlotNoArgs>,
+    line_edit_edited: CppBox<SlotNoArgs>,
 }
 
-impl<'a> Form<'a> {
-    fn new() -> Form<'a> {
+impl Form {
+    fn new() -> Form {
         unsafe {
             let mut widget = QWidget::new_0a();
             let mut layout = QVBoxLayout::new_1a(&mut widget).into_ptr();
@@ -35,7 +35,7 @@ impl<'a> Form<'a> {
             let widget_ptr = widget.as_mut_ptr();
 
             let form = Form {
-                button_clicked: Slot::new(move || {
+                button_clicked: SlotNoArgs::with(move || {
                     let text = line_edit.text();
                     QMessageBox::information_q_widget2_q_string(
                         widget_ptr,
@@ -44,7 +44,7 @@ impl<'a> Form<'a> {
                             .arg_q_string(&text),
                     );
                 }),
-                line_edit_edited: Slot::new(move || {
+                line_edit_edited: SlotNoArgs::with(move || {
                     button.set_enabled(!line_edit.text().is_empty());
                 }),
                 _widget: widget,
