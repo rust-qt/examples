@@ -1,5 +1,5 @@
 language: rust
-rust: 1.38.0
+rust: 1.41.0
 script: ci/run.bash
 cache:
     directories:
@@ -15,7 +15,7 @@ matrix:
             env: QT_VERSION=5.9.7
         -   os: windows
             env: QT_VERSION=5.9.7
-            rust: 1.38.0-x86_64-pc-windows-msvc
+            rust: 1.41.0-x86_64-pc-windows-msvc
         -   os: linux
             dist: bionic
             env: QT_VERSION=5.11.3
@@ -23,7 +23,7 @@ matrix:
             env: QT_VERSION=5.11.3
         -   os: windows
             env: QT_VERSION=5.11.3
-            rust: 1.38.0-x86_64-pc-windows-msvc
+            rust: 1.41.0-x86_64-pc-windows-msvc
         -   os: linux
             dist: bionic
             env: QT_VERSION=5.12.2
@@ -31,7 +31,7 @@ matrix:
             env: QT_VERSION=5.12.2
         -   os: windows
             env: QT_VERSION=5.12.2
-            rust: 1.38.0-x86_64-pc-windows-msvc
+            rust: 1.41.0-x86_64-pc-windows-msvc
         -   os: linux
             dist: bionic
             env: QT_VERSION=5.13.0
@@ -39,4 +39,12 @@ matrix:
             env: QT_VERSION=5.13.0
         -   os: windows
             env: QT_VERSION=5.13.0
-            rust: 1.38.0-x86_64-pc-windows-msvc
+            rust: 1.41.0-x86_64-pc-windows-msvc
+        -   os: linux
+            dist: bionic
+            env: QT_VERSION=5.14.1
+        -   os: osx
+            env: QT_VERSION=5.14.1
+        -   os: windows
+            env: QT_VERSION=5.14.1
+            rust: 1.41.0-x86_64-pc-windows-msvc

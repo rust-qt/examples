@@ -73,8 +73,7 @@ cd "$TRAVIS_BUILD_DIR"
 
 function build() {
     if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-        COMMAND="$@"
-        cmd.exe /C "\"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat\" amd64 && $COMMAND"
+        cmd.exe //C 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat' amd64 '&&' "$@"
     else
         "$@"
     fi
