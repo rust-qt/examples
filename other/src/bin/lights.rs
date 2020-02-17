@@ -23,11 +23,13 @@ fn setup_scene(root: MutPtr<QEntity>) -> Box<dyn Fn() -> ()> {
         sphere1_mesh.set_rings(60);
         sphere1_mesh.set_slices(30);
         sphere1.add_component(sphere1_mesh.into_ptr());
-        let mut sphere1_material = QMetalRoughMaterial::new_0a();
+
+        let mut sphere1_material = QMetalRoughMaterial::new_0a().into_q_mut_ptr();
         sphere1_material.set_base_color_q_color(&QColor::from_rgb_3a(255, 255, 255));
         sphere1_material.set_metalness_float(0.5);
         sphere1_material.set_roughness_float(0.2);
-        sphere1.add_component(sphere1_material.into_ptr());
+        sphere1.add_component(sphere1_material);
+
         let mut sphere1_transform = QTransform::new_0a();
         sphere1_transform.set_translation(&QVector3D::from_3_float(-2.0, 0.0, 0.0));
         sphere1.add_component(sphere1_transform.into_ptr());
@@ -128,7 +130,7 @@ fn main() {
 
             let mut root = QEntity::new_0a();
             let activate_next_light = setup_scene(root.as_mut_ptr());
-            let next_light_slot = SlotNoArgs::with(activate_next_light);
+            let next_light_slot = SlotNoArgs::new(NullPtr, activate_next_light);
 
             let keyboard_device = QKeyboardDevice::new_1a(&mut root);
             let mut handler = QEntity::new_1a(&mut root);

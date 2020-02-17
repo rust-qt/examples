@@ -1,22 +1,20 @@
 #![windows_subsystem = "windows"]
 
-use qt_core::{QBuffer, QByteArray, QString, SlotOfBool};
-use qt_ui_tools::{cpp_core::CppBox, QUiLoader};
+use qt_core::{QBox, QString, SlotOfBool};
+use qt_ui_tools::QUiLoader;
 use qt_widgets::{QApplication, QCheckBox, QLabel, QWidget};
 
 struct Form {
-    _widget: CppBox<QWidget>,
-    _check_box_toggled: CppBox<SlotOfBool>,
+    _widget: QBox<QWidget>,
 }
 
 impl Form {
     fn new() -> Form {
         unsafe {
             let form_data = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/form1.ui"));
-            let mut byte_array = QByteArray::from_slice(form_data);
-            let mut buffer = QBuffer::from_q_byte_array(&mut byte_array);
             let mut ui_loader = QUiLoader::new_0a();
-            let mut widget = CppBox::new(ui_loader.load_1a(&mut buffer)).expect("load failed");
+            let mut widget = ui_loader.load_bytes(form_data);
+            assert!(!widget.is_null(), "invalid ui file");
             widget.show();
 
             let check_box = widget
@@ -33,16 +31,14 @@ impl Form {
                 .dynamic_cast_mut::<QLabel>()
                 .expect("widget type mismatch");
 
-            let check_box_toggled = SlotOfBool::with(move |checked| {
-                let text = if checked { "Checked!" } else { "Unchecked!" };
-                label.set_text(&QString::from_std_str(text));
-            });
-            check_box.toggled().connect(&check_box_toggled);
+            check_box
+                .toggled()
+                .connect(&SlotOfBool::new(&mut widget, move |checked| {
+                    let text = if checked { "Checked!" } else { "Unchecked!" };
+                    label.set_text(&QString::from_std_str(text));
+                }));
 
-            Form {
-                _widget: widget,
-                _check_box_toggled: check_box_toggled,
-            }
+            Form { _widget: widget }
         }
     }
 }

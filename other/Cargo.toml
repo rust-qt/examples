@@ -1,0 +1,22 @@
+[package]
+name = "qt_examples"
+version = "0.0.0"
+authors = ["Pavel Strakhov <ri@idzaaus.org>"]
+edition = "2018"
+
+description = "Qt examples"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-qt/examples"
+
+[dependencies]
+qt_core = "0.5.0-alpha.1"
+qt_gui = "0.5.0-alpha.1"
+qt_widgets = "0.5.0-alpha.1"
+qt_ui_tools = "0.5.0-alpha.1"
+qt_3d_core = "0.5.0-alpha.1"
+qt_3d_render = "0.5.0-alpha.1"
+qt_3d_input = "0.5.0-alpha.1"
+qt_3d_logic = "0.5.0-alpha.1"
+qt_3d_extras = "0.5.0-alpha.1"
+qt_charts = "0.5.0-alpha.1"
+qt_qml = "0.5.0-alpha.1"

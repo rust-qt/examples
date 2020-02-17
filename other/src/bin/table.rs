@@ -18,20 +18,24 @@ fn main() {
         item2.set_text(&QString::from_std_str("Item 2"));
         table.set_item(1, 0, item2);
 
-        let slot = SlotOfQTableWidgetItemQTableWidgetItem::with(|mut current, mut previous| {
-            if !previous.is_null() {
-                let mut font = previous.font();
-                font.set_bold(false);
-                previous.set_font(&font);
-            }
-            if !current.is_null() {
-                let mut font = current.font();
-                font.set_bold(true);
-                current.set_font(&font);
-            }
-            println!("ok");
-        });
-        table.current_item_changed().connect(&slot);
+        table
+            .current_item_changed()
+            .connect(&SlotOfQTableWidgetItemQTableWidgetItem::new(
+                &mut table,
+                |mut current, mut previous| {
+                    if !previous.is_null() {
+                        let mut font = previous.font();
+                        font.set_bold(false);
+                        previous.set_font(&font);
+                    }
+                    if !current.is_null() {
+                        let mut font = current.font();
+                        font.set_bold(true);
+                        current.set_font(&font);
+                    }
+                    println!("ok");
+                },
+            ));
         table.show();
 
         let mut menu = QMenu::new();
