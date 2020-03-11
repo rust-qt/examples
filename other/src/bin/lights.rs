@@ -13,58 +13,58 @@ use std::cell::*;
 
 // false positive, see https://github.com/rust-lang/rust-clippy/issues/4384
 #[allow(clippy::clone_on_copy)]
-fn setup_scene(root: MutPtr<QEntity>) -> Box<dyn Fn() -> ()> {
+fn setup_scene(root: Ptr<QEntity>) -> Box<dyn Fn() -> ()> {
     unsafe {
-        let mut scene = QEntity::new_1a(root);
+        let scene = QEntity::new_1a(root);
 
-        let mut sphere1 = QEntity::new_1a(&mut scene);
-        let mut sphere1_mesh = QSphereMesh::new_0a();
+        let sphere1 = QEntity::new_1a(&scene);
+        let sphere1_mesh = QSphereMesh::new_0a();
         sphere1_mesh.set_radius(1.0);
         sphere1_mesh.set_rings(60);
         sphere1_mesh.set_slices(30);
         sphere1.add_component(sphere1_mesh.into_ptr());
 
-        let mut sphere1_material = QMetalRoughMaterial::new_0a().into_q_mut_ptr();
+        let sphere1_material = QMetalRoughMaterial::new_0a().into_q_ptr();
         sphere1_material.set_base_color_q_color(&QColor::from_rgb_3a(255, 255, 255));
         sphere1_material.set_metalness_float(0.5);
         sphere1_material.set_roughness_float(0.2);
         sphere1.add_component(sphere1_material);
 
-        let mut sphere1_transform = QTransform::new_0a();
+        let sphere1_transform = QTransform::new_0a();
         sphere1_transform.set_translation(&QVector3D::from_3_float(-2.0, 0.0, 0.0));
         sphere1.add_component(sphere1_transform.into_ptr());
         sphere1.into_raw_ptr();
 
-        let mut sphere2 = QEntity::new_1a(&mut scene);
-        let mut sphere2_mesh = QSphereMesh::new_0a();
+        let sphere2 = QEntity::new_1a(&scene);
+        let sphere2_mesh = QSphereMesh::new_0a();
         sphere2_mesh.set_radius(1.0);
         sphere2_mesh.set_rings(60);
         sphere2_mesh.set_slices(30);
         sphere2.add_component(sphere2_mesh.into_ptr());
-        let mut sphere2_material = QMetalRoughMaterial::new_0a();
+        let sphere2_material = QMetalRoughMaterial::new_0a();
         sphere2_material.set_base_color_q_color(&QColor::from_rgb_3a(255, 255, 255));
         sphere2_material.set_metalness_float(0.5);
         sphere2_material.set_roughness_float(0.2);
         sphere2.add_component(sphere2_material.into_ptr());
-        let mut sphere2_transform = QTransform::new_0a();
+        let sphere2_transform = QTransform::new_0a();
         sphere2_transform.set_translation(&QVector3D::from_3_float(2.0, 0.0, 0.0));
         sphere2.add_component(sphere2_transform.into_ptr());
         sphere2.into_raw_ptr();
 
-        let mut plane = QEntity::new_1a(&mut scene);
+        let plane = QEntity::new_1a(&scene);
         plane.add_component(QPlaneMesh::new_0a().into_ptr());
-        let mut plane_material = QMetalRoughMaterial::new_0a();
+        let plane_material = QMetalRoughMaterial::new_0a();
         plane_material.set_base_color_q_color(&QColor::from_rgb_3a(255, 255, 255));
         plane_material.set_metalness_float(0.5);
         plane_material.set_roughness_float(0.5);
         plane.add_component(plane_material.into_ptr());
-        let mut plane_transform = QTransform::new_0a();
+        let plane_transform = QTransform::new_0a();
         plane_transform.set_scale(100.0);
         plane_transform.set_translation(&QVector3D::from_3_float(0.0, -2.0, 0.0));
         plane.add_component(plane_transform.into_ptr());
         plane.into_raw_ptr();
 
-        let mut directional_light = QDirectionalLight::new_0a();
+        let directional_light = QDirectionalLight::new_0a();
         directional_light.set_enabled(true);
         directional_light.set_color(&QColor::from_rgb_3a(255, 0, 0));
         directional_light.set_intensity(1.0);
@@ -72,8 +72,8 @@ fn setup_scene(root: MutPtr<QEntity>) -> Box<dyn Fn() -> ()> {
         let directional_light = directional_light.into_ptr();
         scene.add_component(directional_light);
 
-        let mut point_light_entity = QEntity::new_1a(&mut scene);
-        let mut point_light = QPointLight::new_0a();
+        let point_light_entity = QEntity::new_1a(&scene);
+        let point_light = QPointLight::new_0a();
         point_light.set_enabled(false);
         point_light.set_color(&QColor::from_rgb_3a(0, 255, 0));
         point_light.set_intensity(1.0);
@@ -81,13 +81,13 @@ fn setup_scene(root: MutPtr<QEntity>) -> Box<dyn Fn() -> ()> {
         point_light.set_quadratic_attenuation(0.05);
         let point_light = point_light.into_ptr();
         point_light_entity.add_component(point_light);
-        let mut point_light_transform = QTransform::new_0a();
+        let point_light_transform = QTransform::new_0a();
         point_light_transform.set_translation(&QVector3D::from_3_float(0.0, 3.0, 1.0));
         point_light_entity.add_component(point_light_transform.into_ptr());
         point_light_entity.into_raw_ptr();
 
-        let mut spot_light_entity = QEntity::new_1a(&mut scene);
-        let mut spot_light = QSpotLight::new_0a();
+        let spot_light_entity = QEntity::new_1a(&scene);
+        let spot_light = QSpotLight::new_0a();
         spot_light.set_enabled(false);
         spot_light.set_color(&QColor::from_rgb_3a(0, 0, 255));
         spot_light.set_intensity(1.0);
@@ -97,7 +97,7 @@ fn setup_scene(root: MutPtr<QEntity>) -> Box<dyn Fn() -> ()> {
         spot_light.set_quadratic_attenuation(0.005);
         let spot_light = spot_light.into_ptr();
         spot_light_entity.add_component(spot_light);
-        let mut spot_light_transform = QTransform::new_0a();
+        let spot_light_transform = QTransform::new_0a();
         spot_light_transform.set_translation(&QVector3D::from_3_float(6.0, 6.0, 0.0));
         spot_light_entity.add_component(spot_light_transform.into_ptr());
         spot_light_entity.into_raw_ptr();
@@ -117,7 +117,7 @@ fn setup_scene(root: MutPtr<QEntity>) -> Box<dyn Fn() -> ()> {
 
 fn main() {
     unsafe {
-        let mut format = QSurfaceFormat::new_0a();
+        let format = QSurfaceFormat::new_0a();
         format.set_version(3, 3);
         format.set_profile(OpenGLContextProfile::CoreProfile);
         format.set_depth_buffer_size(24);
@@ -126,15 +126,15 @@ fn main() {
         QSurfaceFormat::set_default_format(&format);
 
         QGuiApplication::init(|_| {
-            let mut window = Qt3DWindow::new_0a();
+            let window = Qt3DWindow::new_0a();
 
-            let mut root = QEntity::new_0a();
-            let activate_next_light = setup_scene(root.as_mut_ptr());
+            let root = QEntity::new_0a();
+            let activate_next_light = setup_scene(root.as_ptr());
             let next_light_slot = SlotNoArgs::new(NullPtr, activate_next_light);
 
-            let keyboard_device = QKeyboardDevice::new_1a(&mut root);
-            let mut handler = QEntity::new_1a(&mut root);
-            let mut keyboard_handler = QKeyboardHandler::new_0a();
+            let keyboard_device = QKeyboardDevice::new_1a(&root);
+            let handler = QEntity::new_1a(&root);
+            let keyboard_handler = QKeyboardHandler::new_0a();
             keyboard_handler.set_source_device(keyboard_device.into_ptr());
             keyboard_handler.set_focus(true);
             keyboard_handler.tab_pressed().connect(&next_light_slot);
@@ -142,11 +142,11 @@ fn main() {
             handler.add_component(keyboard_handler.into_ptr());
             handler.into_ptr();
 
-            let mut camera = window.camera();
+            let camera = window.camera();
             camera.set_position(&QVector3D::from_3_float(0.0, 0.0, 30.0));
             camera.set_view_center(&QVector3D::from_3_float(0.0, 0.0, 0.0));
 
-            let mut controller = QOrbitCameraController::new_1a(&mut root);
+            let controller = QOrbitCameraController::new_1a(&root);
             controller.set_camera(camera);
             controller.set_linear_speed(50.0);
             controller.set_look_speed(180.0);

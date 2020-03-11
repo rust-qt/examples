@@ -12,28 +12,28 @@ impl Form {
     fn new() -> Form {
         unsafe {
             let form_data = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/form1.ui"));
-            let mut ui_loader = QUiLoader::new_0a();
-            let mut widget = ui_loader.load_bytes(form_data);
+            let ui_loader = QUiLoader::new_0a();
+            let widget = ui_loader.load_bytes(form_data);
             assert!(!widget.is_null(), "invalid ui file");
             widget.show();
 
             let check_box = widget
                 .find_child_q_object_1a(&QString::from_std_str("checkBox"))
-                .as_mut_ref()
+                .as_ref()
                 .expect("child not found")
-                .dynamic_cast_mut::<QCheckBox>()
+                .dynamic_cast::<QCheckBox>()
                 .expect("widget type mismatch");
 
-            let mut label = widget
+            let label = widget
                 .find_child_q_object_1a(&QString::from_std_str("label"))
-                .as_mut_ref()
+                .as_ref()
                 .expect("child not found")
-                .dynamic_cast_mut::<QLabel>()
+                .dynamic_cast::<QLabel>()
                 .expect("widget type mismatch");
 
             check_box
                 .toggled()
-                .connect(&SlotOfBool::new(&mut widget, move |checked| {
+                .connect(&SlotOfBool::new(&widget, move |checked| {
                     let text = if checked { "Checked!" } else { "Unchecked!" };
                     label.set_text(&QString::from_std_str(text));
                 }));

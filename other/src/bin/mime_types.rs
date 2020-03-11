@@ -6,7 +6,7 @@ fn main() {
         let arguments = arguments.static_upcast::<QListOfQString>();
         println!("arguments: {:?}", qdebug(arguments));
 
-        for arg in arguments {
+        for arg in arguments.iter() {
             println!("argument: {:?}", qdebug(arg));
         }
         0

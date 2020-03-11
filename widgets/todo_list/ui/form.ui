@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>782</width>
+    <height>531</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Todo List</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -31,9 +31,44 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="remove">
+      <widget class="QPushButton" name="remove_selected">
        <property name="text">
-        <string>Remove</string>
+        <string>Remove selected</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Show:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="show_all">
+       <property name="text">
+        <string>All</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="show_active">
+       <property name="text">
+        <string>Active</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="show_completed">
+       <property name="text">
+        <string>Completed</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="remove_completed">
+       <property name="text">
+        <string>Remove completed</string>
        </property>
       </widget>
      </item>

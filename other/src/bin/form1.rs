@@ -5,21 +5,21 @@ use qt_widgets::{QApplication, QLineEdit, QMessageBox, QPushButton, QVBoxLayout,
 
 fn form() -> QBox<QWidget> {
     unsafe {
-        let mut widget = QWidget::new_0a();
-        let mut layout = QVBoxLayout::new_1a(&mut widget).into_ptr();
-        let mut line_edit = QLineEdit::new();
+        let widget = QWidget::new_0a();
+        let layout = QVBoxLayout::new_1a(&widget).into_ptr();
+        let line_edit = QLineEdit::new();
 
-        layout.add_widget(&mut line_edit);
+        layout.add_widget(&line_edit);
         let line_edit = line_edit.into_ptr();
 
-        let mut button = QPushButton::from_q_string(&QString::from_std_str("Start"));
+        let button = QPushButton::from_q_string(&QString::from_std_str("Start"));
         button.set_enabled(false);
 
-        layout.add_widget(&mut button);
-        let mut button = button.into_ptr();
+        layout.add_widget(&button);
+        let button = button.into_ptr();
 
         widget.show();
-        let widget_ptr = widget.as_mut_ptr();
+        let widget_ptr = widget.as_ptr();
 
         button.clicked().connect(&SlotNoArgs::new(button, move || {
             let text = line_edit.text();
