@@ -1,6 +1,7 @@
 use cpp_core::Ptr;
 use qt_core::{qs, CheckState, QBox, QPtr, SlotNoArgs};
 use qt_gui::{QStandardItem, QStandardItemModel};
+use qt_macros::slot;
 use qt_ui_tools::QUiLoader;
 use qt_widgets::{QApplication, QListView, QPushButton, QRadioButton, QWidget};
 use std::rc::Rc;
@@ -72,13 +73,7 @@ impl TodoWidget {
         self.form.widget.as_ptr()
     }
 
-    unsafe fn slot_on_add_clicked(self: &Rc<Self>) -> QBox<SlotNoArgs> {
-        let this = Rc::clone(&self);
-        SlotNoArgs::new(self.main_widget(), move || {
-            this.on_add_clicked();
-        })
-    }
-
+    #[slot(SlotNoArgs)]
     fn on_add_clicked(self: &Rc<Self>) {
         unsafe {
             let item = QStandardItem::new().into_ptr();
@@ -91,13 +86,7 @@ impl TodoWidget {
         }
     }
 
-    unsafe fn slot_on_list_selection_changed(self: &Rc<Self>) -> QBox<SlotNoArgs> {
-        let this = Rc::clone(&self);
-        SlotNoArgs::new(self.main_widget(), move || {
-            this.on_list_selection_changed();
-        })
-    }
-
+    #[slot(SlotNoArgs)]
     fn on_list_selection_changed(self: &Rc<Self>) {
         unsafe {
             let count = self

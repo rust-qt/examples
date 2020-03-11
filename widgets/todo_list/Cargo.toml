@@ -11,3 +11,5 @@ qt_core = "0.5.0-alpha.1"
 qt_gui = "0.5.0-alpha.1"
 qt_widgets = "0.5.0-alpha.1"
 qt_ui_tools = "0.5.0-alpha.1"
+
+qt_macros = { path = "../../qt_macros" }
