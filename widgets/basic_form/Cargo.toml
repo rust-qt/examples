@@ -1,0 +1,17 @@
+[package]
+name = "basic_form"
+version = "0.0.0"
+authors = ["Pavel Strakhov <ri@idzaaus.org>"]
+edition = "2018"
+publish = false
+
+[dependencies]
+cpp_core = "0.5.1"
+qt_core = "0.5.0-alpha.1"
+qt_gui = "0.5.0-alpha.1"
+qt_widgets = "0.5.0-alpha.1"
+qt_ui_tools = "0.5.0-alpha.1"
+qt_macros = "0.1.0-alpha.1"
+
+[build-dependencies]
+qt_ritual_build = "0.4.0"

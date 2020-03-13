@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use cpp_core::Ptr;
 use qt_core::{qs, CheckState, ItemDataRole, QBox, QPtr, QSortFilterProxyModel, SlotNoArgs};
 use qt_gui::{QStandardItem, QStandardItemModel};
