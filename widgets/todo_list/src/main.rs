@@ -1,11 +1,12 @@
 use cpp_core::Ptr;
-use qt_core::{qs, CheckState, QBox, QPtr, SlotNoArgs};
+use qt_core::{qs, CheckState, ItemDataRole, QBox, QPtr, QSortFilterProxyModel, SlotNoArgs};
 use qt_gui::{QStandardItem, QStandardItemModel};
-use qt_macros::slot;
-use qt_ui_tools::QUiLoader;
+use qt_macros::{slot, ui_form};
 use qt_widgets::{QApplication, QListView, QPushButton, QRadioButton, QWidget};
+use std::collections::BTreeSet;
 use std::rc::Rc;
 
+#[ui_form("../ui/form.ui")]
 #[derive(Debug)]
 struct Form {
     widget: QBox<QWidget>,
@@ -18,54 +19,71 @@ struct Form {
     remove_completed: QPtr<QPushButton>,
 }
 
-impl Form {
-    pub fn load() -> Form {
-        unsafe {
-            let loader = QUiLoader::new_0a();
-            let widget = loader.load_bytes(include_bytes!("../ui/form.ui"));
-            assert!(!widget.is_null(), "invalid ui file");
-
-            Form {
-                add: widget.find_child("add").unwrap(),
-                remove_selected: widget.find_child("remove_selected").unwrap(),
-                remove_completed: widget.find_child("remove_completed").unwrap(),
-                list: widget.find_child("list").unwrap(),
-                show_all: widget.find_child("show_all").unwrap(),
-                show_active: widget.find_child("show_active").unwrap(),
-                show_completed: widget.find_child("show_completed").unwrap(),
-                widget,
-            }
-        }
-    }
-}
-
 #[derive(Debug)]
 struct TodoWidget {
     form: Form,
-    model: QBox<QStandardItemModel>,
+    source_model: QBox<QStandardItemModel>,
+    proxy_model: QBox<QSortFilterProxyModel>,
 }
 
 impl TodoWidget {
     fn new() -> Rc<Self> {
-        let this = Rc::new(TodoWidget {
-            form: Form::load(),
-            model: unsafe { QStandardItemModel::new_0a() },
-        });
-        this.init();
-        this
+        unsafe {
+            let this = Rc::new(TodoWidget {
+                form: Form::load(),
+                source_model: QStandardItemModel::new_0a(),
+                proxy_model: QSortFilterProxyModel::new_0a(),
+            });
+            this.init();
+            this
+        }
     }
 
-    fn init(self: &Rc<Self>) {
-        unsafe {
-            self.form.list.set_model(&self.model);
-            self.form.add.clicked().connect(&self.slot_on_add_clicked());
-            self.form
-                .list
-                .selection_model()
-                .selection_changed()
-                .connect(&self.slot_on_list_selection_changed());
-            self.on_list_selection_changed();
+    unsafe fn init(self: &Rc<Self>) {
+        for &(text, is_done) in &[
+            ("Learn Qt", true),
+            ("Learn Rust", true),
+            ("Conquer the world", false),
+        ] {
+            let item = QStandardItem::new().into_ptr();
+            item.set_text(&qs(text));
+            item.set_checkable(true);
+            item.set_check_state(if is_done {
+                CheckState::Checked
+            } else {
+                CheckState::Unchecked
+            });
+            self.source_model.append_row_q_standard_item(item);
         }
+
+        self.proxy_model.set_source_model(&self.source_model);
+        self.proxy_model
+            .set_filter_role(ItemDataRole::CheckStateRole.into());
+        self.form.list.set_model(&self.proxy_model);
+        self.form.add.clicked().connect(&self.slot_on_add_clicked());
+        self.form
+            .remove_selected
+            .clicked()
+            .connect(&self.slot_on_remove_selected_clicked());
+        self.form
+            .remove_completed
+            .clicked()
+            .connect(&self.slot_on_remove_completed_clicked());
+        self.form
+            .list
+            .selection_model()
+            .selection_changed()
+            .connect(&self.slot_on_list_selection_changed());
+
+        for button in &[
+            &self.form.show_completed,
+            &self.form.show_active,
+            &self.form.show_all,
+        ] {
+            button.toggled().connect(&self.slot_on_filter_changed());
+        }
+
+        self.on_list_selection_changed();
     }
 
     #[inline]
@@ -74,28 +92,74 @@ impl TodoWidget {
     }
 
     #[slot(SlotNoArgs)]
-    fn on_add_clicked(self: &Rc<Self>) {
-        unsafe {
-            let item = QStandardItem::new().into_ptr();
-            item.set_text(&qs("New item"));
-            item.set_check_state(CheckState::Unchecked);
-            item.set_checkable(true);
-            self.model.append_row_q_standard_item(item);
-            self.form.list.set_current_index(&item.index());
-            self.form.list.edit(&item.index());
+    unsafe fn on_add_clicked(self: &Rc<Self>) {
+        if self.form.show_completed.is_checked() {
+            self.form.show_all.set_checked(true);
+        }
+
+        let item = QStandardItem::new().into_ptr();
+        item.set_text(&qs("New item"));
+        item.set_checkable(true);
+        item.set_check_state(CheckState::Unchecked);
+        self.source_model.append_row_q_standard_item(item);
+        let index = self.proxy_model.map_from_source(&item.index());
+        self.form.list.set_current_index(&index);
+        self.form.list.edit(&index);
+    }
+
+    #[slot(SlotNoArgs)]
+    unsafe fn on_list_selection_changed(self: &Rc<Self>) {
+        let count = self
+            .form
+            .list
+            .selection_model()
+            .selected_rows_0a()
+            .count_0a();
+        self.form.remove_selected.set_enabled(count > 0);
+    }
+
+    #[slot(SlotNoArgs)]
+    unsafe fn on_filter_changed(self: &Rc<Self>) {
+        let filter_value = if self.form.show_active.is_checked() {
+            Some(CheckState::Unchecked)
+        } else if self.form.show_completed.is_checked() {
+            Some(CheckState::Checked)
+        } else {
+            None
+        };
+        let filter_string = if let Some(filter_value) = filter_value {
+            filter_value.to_int().to_string()
+        } else {
+            String::new()
+        };
+        self.proxy_model.set_filter_fixed_string(&qs(filter_string));
+    }
+
+    #[slot(SlotNoArgs)]
+    unsafe fn on_remove_selected_clicked(self: &Rc<Self>) {
+        let selection = self
+            .proxy_model
+            .map_selection_to_source(&self.form.list.selection_model().selection());
+        let rows = selection
+            .indexes()
+            .iter()
+            .map(|index| index.row())
+            .collect::<BTreeSet<_>>();
+        for &row in rows.iter().rev() {
+            self.source_model.remove_row_1a(row);
         }
     }
 
     #[slot(SlotNoArgs)]
-    fn on_list_selection_changed(self: &Rc<Self>) {
-        unsafe {
-            let count = self
-                .form
-                .list
-                .selection_model()
-                .selected_rows_0a()
-                .count_0a();
-            self.form.remove_selected.set_enabled(count > 0);
+    unsafe fn on_remove_completed_clicked(self: &Rc<Self>) {
+        for row in (0..self.source_model.row_count_0a()).rev() {
+            let state = self.source_model.data_2a(
+                &self.source_model.index_2a(row, 0),
+                ItemDataRole::CheckStateRole.into(),
+            );
+            if state.to_int_0a() == CheckState::Checked.to_int() {
+                self.source_model.remove_row_1a(row);
+            }
         }
     }
 
@@ -113,6 +177,3 @@ fn main() {
         unsafe { QApplication::exec() }
     })
 }
-
-#[cfg(test)]
-mod tests {}
