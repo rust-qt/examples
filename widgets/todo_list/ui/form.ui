@@ -28,12 +28,20 @@
        <property name="text">
         <string>Add</string>
        </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="remove_selected">
        <property name="text">
         <string>Remove selected</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
        </property>
       </widget>
      </item>
@@ -92,6 +100,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
