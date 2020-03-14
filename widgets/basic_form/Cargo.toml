@@ -4,6 +4,9 @@ version = "0.0.0"
 authors = ["Pavel Strakhov <ri@idzaaus.org>"]
 edition = "2018"
 publish = false
+description = "Qt examples"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-qt/examples"
 
 [dependencies]
 cpp_core = "0.5.1"

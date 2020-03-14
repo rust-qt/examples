@@ -81,9 +81,12 @@ function build() {
 
 build cargo clippy --color=always --all-targets -- -D warnings
 
-build $XVFB cargo test --color=always --manifest-path other/Cargo.toml -p qt_core -p qt_gui -p qt_widgets -p qt_ui_tools -p qt_3d_core -p qt_3d_render -p qt_3d_input -p qt_3d_logic -p qt_3d_extras -p qt_charts -p qt_qml
+build $XVFB cargo test --color=always --manifest-path widgets/todo_list/Cargo.toml -p qt_core -p qt_gui -p qt_widgets -p qt_ui_tools
+build $XVFB cargo test --color=always --manifest-path 3d/lights/Cargo.toml -p qt_3d_core -p qt_3d_render -p qt_3d_input -p qt_3d_logic -p qt_3d_extras
+build $XVFB cargo test --color=always --manifest-path charts/chart/Cargo.toml -p qt_charts
+build $XVFB cargo test --color=always --manifest-path qml/hello_qml/Cargo.toml -p qt_qml
 
 build $XVFB cargo build --color=always --all-targets -v
 
 ARGS=*
-build $XVFB cargo run --color=always --bin mime_types -- $ARGS
+build $XVFB cargo run --color=always -p mime_types -- $ARGS

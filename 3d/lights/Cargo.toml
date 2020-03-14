@@ -1,9 +1,9 @@
 [package]
 name = "lights"
 version = "0.0.0"
-authors = ["Pavel Strakhov <ri@idzaaus.org>"]
+authors = ["Kevin Ottens <ervin@kde.org>", "Pavel Strakhov <ri@idzaaus.org>"]
 edition = "2018"
-
+publish = false
 description = "Qt examples"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-qt/examples"
