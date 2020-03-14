@@ -1,0 +1,15 @@
+[package]
+name = "chart"
+version = "0.0.0"
+authors = ["Pavel Strakhov <ri@idzaaus.org>"]
+edition = "2018"
+
+description = "Qt examples"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-qt/examples"
+
+[dependencies]
+qt_core = "0.5.0-alpha.1"
+qt_gui = "0.5.0-alpha.1"
+qt_widgets = "0.5.0-alpha.1"
+qt_charts = "0.5.0-alpha.1"
