@@ -1,8 +1,7 @@
 #![windows_subsystem = "windows"]
 
-use cpp_core::{Ptr, Ref};
-use qt_core::{qs, ContextMenuPolicy, QBox, QPoint, SlotNoArgs};
-use qt_macros::slot;
+use cpp_core::{Ptr, Ref, StaticUpcast};
+use qt_core::{qs, slot, ContextMenuPolicy, QBox, QObject, QPoint, SlotNoArgs};
 use qt_widgets::{
     QAction, QApplication, QLineEdit, QMenu, QMessageBox, QPushButton, QTableWidget,
     QTableWidgetItem, QVBoxLayout, QWidget, SlotOfQPoint, SlotOfQTableWidgetItemQTableWidgetItem,
@@ -14,6 +13,12 @@ struct Form {
     line_edit: QBox<QLineEdit>,
     button: QBox<QPushButton>,
     table: QBox<QTableWidget>,
+}
+
+impl StaticUpcast<QObject> for Form {
+    unsafe fn static_upcast(ptr: Ptr<Self>) -> Ptr<QObject> {
+        ptr.widget.as_ptr().static_upcast()
+    }
 }
 
 impl Form {
@@ -70,11 +75,6 @@ impl Form {
         self.table
             .custom_context_menu_requested()
             .connect(&self.slot_on_table_context_menu_requested());
-    }
-
-    #[inline]
-    unsafe fn main_widget(&self) -> Ptr<QWidget> {
-        self.widget.as_ptr()
     }
 
     #[slot(SlotNoArgs)]

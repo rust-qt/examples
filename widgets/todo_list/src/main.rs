@@ -1,9 +1,12 @@
 #![windows_subsystem = "windows"]
 
-use cpp_core::Ptr;
-use qt_core::{qs, CheckState, ItemDataRole, QBox, QPtr, QSortFilterProxyModel, SlotNoArgs};
+use cpp_core::{Ptr, StaticUpcast};
+use qt_core::{
+    q_init_resource, qs, slot, CheckState, ItemDataRole, QBox, QObject, QPtr,
+    QSortFilterProxyModel, SlotNoArgs,
+};
 use qt_gui::{QStandardItem, QStandardItemModel};
-use qt_macros::{slot, ui_form};
+use qt_ui_tools::ui_form;
 use qt_widgets::{QApplication, QListView, QPushButton, QRadioButton, QWidget};
 use std::collections::BTreeSet;
 use std::rc::Rc;
@@ -26,6 +29,12 @@ struct TodoWidget {
     form: Form,
     source_model: QBox<QStandardItemModel>,
     proxy_model: QBox<QSortFilterProxyModel>,
+}
+
+impl StaticUpcast<QObject> for TodoWidget {
+    unsafe fn static_upcast(ptr: Ptr<Self>) -> Ptr<QObject> {
+        ptr.form.widget.as_ptr().static_upcast()
+    }
 }
 
 impl TodoWidget {
@@ -86,11 +95,6 @@ impl TodoWidget {
         }
 
         self.on_list_selection_changed();
-    }
-
-    #[inline]
-    unsafe fn main_widget(&self) -> Ptr<QWidget> {
-        self.form.widget.as_ptr()
     }
 
     #[slot(SlotNoArgs)]
@@ -174,6 +178,7 @@ impl TodoWidget {
 
 fn main() {
     QApplication::init(|_| {
+        q_init_resource!("resources");
         let todo_widget = TodoWidget::new();
         todo_widget.show();
         unsafe { QApplication::exec() }

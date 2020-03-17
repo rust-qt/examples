@@ -9,7 +9,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-qt/examples"
 
 [dependencies]
-qt_core = "0.5.0-alpha.1"
-qt_gui = "0.5.0-alpha.1"
-qt_widgets = "0.5.0-alpha.1"
-qt_charts = "0.5.0-alpha.1"
+qt_core = "0.5.0-alpha.2"
+qt_gui = "0.5.0-alpha.2"
+qt_widgets = "0.5.0-alpha.2"
+qt_charts = "0.5.0-alpha.2"

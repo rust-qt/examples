@@ -1,2 +1,10 @@
 [workspace]
-members = ["widgets/todo_list", "other"]
+members = [
+    "widgets/todo_list",
+    "widgets/basic_form",
+    "core/mime_types",
+    "core/logging",
+    "charts/chart",
+    "3d/lights",
+    "qml/hello_qml",
+]
