@@ -4,6 +4,8 @@
 
 This repository contains examples of using Qt from Rust.
 
+[Rust + Qt guide](https://rust-qt.github.io/qt/)
+
 # License
 
 This project is licensed under either of

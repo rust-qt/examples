@@ -93,9 +93,9 @@ dependencies = [
 
 [[package]]
 name = "cpp_core"
-version = "0.6.0-alpha.1"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8ab876d7db775ee78f6a434338e083984b3fae15e50032399a94a21ba707cfe"
+checksum = "5ebd6ba9742a158232afe2d07ec5d9d5d80d058baf700c5f9aa0e014fe3f24ad"
 dependencies = [
  "libc",
 ]
@@ -209,9 +209,9 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "libc"
-version = "0.2.67"
+version = "0.2.68"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eb147597cdf94ed43ab7a9038716637d2d1bf2bc571da995d0028dec06bd3018"
+checksum = "dea0c0405123bba743ee3f91f49b1c7cfb684eef0da0a50110f758ccf24cdff0"
 
 [[package]]
 name = "lights"
@@ -274,9 +274,9 @@ checksum = "a3bf70094d203e07844da868b634207e71bfab254fe713171fae9a6e751ccf31"
 
 [[package]]
 name = "proc-macro-hack"
-version = "0.5.11"
+version = "0.5.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ecd45702f76d6d3c75a80564378ae228a85f0b59d2f3ed43c91b4a69eb2ebfc5"
+checksum = "f918f2b601f93baa836c1c2945faef682ba5b6d4828ecb45eeb7cc3c71b811b4"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -294,9 +294,9 @@ dependencies = [
 
 [[package]]
 name = "qt_3d_core"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c7ebe35e671e1388d377cbbbfa8e2bad62931e24307ed9fb05fee154292f3cc4"
+checksum = "11d94e0ed4ba32a4a1265592a2df7c4b18bcbbcb5f6ab1cc1c4eaedc0bdd5172"
 dependencies = [
  "cpp_core",
  "qt_core",
@@ -306,9 +306,9 @@ dependencies = [
 
 [[package]]
 name = "qt_3d_extras"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "35308b681be67a56a5ef9aec53981e440135d9f9c8c2609f1dd336f3746d2ba7"
+checksum = "58605402f97530ca06d0f789c4fb9fabcea35b7bd10ae5df43c42bf32e1459ff"
 dependencies = [
  "cpp_core",
  "qt_3d_core",
@@ -322,9 +322,9 @@ dependencies = [
 
 [[package]]
 name = "qt_3d_input"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ce3d892fe27972f8e8da82a39019e69da3825e35b2c40d9e187f4887647846e"
+checksum = "03a51f82db3cbd31497aee653d5ffd4c12f3169b416975662f44b0aba6517e9c"
 dependencies = [
  "cpp_core",
  "qt_3d_core",
@@ -335,9 +335,9 @@ dependencies = [
 
 [[package]]
 name = "qt_3d_logic"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "00a6cfeda4bbff0ffbf75fa1e7726da83def7ee5807b13dd92187a85c301e6c5"
+checksum = "c242f453bcc3c623338a6d1c978b88bc28d4af23ca717754019f3813826649c7"
 dependencies = [
  "cpp_core",
  "qt_3d_core",
@@ -348,9 +348,9 @@ dependencies = [
 
 [[package]]
 name = "qt_3d_render"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4b8bd18651462465c9074bc74cb0cbbc20d9625e7b1c1bafd399e8c9fc079b9e"
+checksum = "0eb8334c8e6cf0b22ce91c9eb60470333c41cbd224f2c85fbac768a236cb7df6"
 dependencies = [
  "cpp_core",
  "qt_3d_core",
@@ -361,9 +361,9 @@ dependencies = [
 
 [[package]]
 name = "qt_charts"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f3cd3426932470e91ed822e5dc3a8fe9c0501549585d74020824a490a224e0eb"
+checksum = "24296b79c4c440b82935f5bde364d282508535a8b7aa04efdedf6a2429b1e873"
 dependencies = [
  "cpp_core",
  "qt_core",
@@ -374,9 +374,9 @@ dependencies = [
 
 [[package]]
 name = "qt_core"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2d98949bbc979aec8417e35427147337dbf58aaa3c210daa091500178db6c82d"
+checksum = "778fa84e9ee19abcf687ff0544f9bb9cd25059fe1ac479736c04475fd8d83a7a"
 dependencies = [
  "cpp_core",
  "proc-macro-hack",
@@ -386,9 +386,9 @@ dependencies = [
 
 [[package]]
 name = "qt_gui"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eca84b176af9fd1b2ae537bd1c4eb849dd129cce0c0ccd6d35d42e73740b09d2"
+checksum = "dcc8366c6860b47084283cecc51397045e8401f492a98ac72b6bf1c7bad21837"
 dependencies = [
  "cpp_core",
  "qt_core",
@@ -397,9 +397,9 @@ dependencies = [
 
 [[package]]
 name = "qt_macros"
-version = "0.1.0-alpha.2"
+version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0b0390f9c44059f089278ec2a97acec61c887d93228c7f80aaef60a37f479758"
+checksum = "6d24b7e8b6a9d551e937f8d9ed222e8f1202f3166e3d38fc6d52bfc25e39aa71"
 dependencies = [
  "proc-macro-hack",
  "proc-macro2",
@@ -409,9 +409,9 @@ dependencies = [
 
 [[package]]
 name = "qt_qml"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "31f40e90f631a2244a6294679673b9f316978b29b8bab5ea317ce2d98cd32703"
+checksum = "0960891ac8412b2ca1e2db8ddf069bda2728cafbad4cd05bb0061305fa171753"
 dependencies = [
  "cpp_core",
  "qt_core",
@@ -421,9 +421,9 @@ dependencies = [
 
 [[package]]
 name = "qt_ritual_build"
-version = "0.5.0-alpha.1"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41cef7262d7d528c9c8fec3a280c76ac8bc22ae948ee273915643b2c0cbc6257"
+checksum = "2a9c99db64e5bc0ab7404d199b7f2da51d77ea3c1d78d01a9390f01aefbd3979"
 dependencies = [
  "env_logger",
  "itertools",
@@ -445,9 +445,9 @@ dependencies = [
 
 [[package]]
 name = "qt_ui_tools"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2cd4cc45eeb661abad33a84e1a530bdbd568915b5e32d2c416a0249d3e3a1f70"
+checksum = "8ad3bc61b5903878bb272e60080b1b4eb395ab1c6bf8808dbfb78b9fc63bc10c"
 dependencies = [
  "cpp_core",
  "qt_core",
@@ -459,9 +459,9 @@ dependencies = [
 
 [[package]]
 name = "qt_widgets"
-version = "0.5.0-alpha.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a22009a77552c7918017044f4fa1a157817452b11f6b12d61a6ac375f6e3201a"
+checksum = "d93cdec198a17bae150564e2da536bf3cb9df91aea63eb48b1b260b216a0b7f6"
 dependencies = [
  "cpp_core",
  "qt_core",
@@ -565,15 +565,15 @@ checksum = "388a1df253eca08550bef6c72392cfe7c30914bf41df5269b68cbd6ff8f570a3"
 
 [[package]]
 name = "serde"
-version = "1.0.104"
+version = "1.0.105"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "414115f25f818d7dfccec8ee535d76949ae78584fc4f79a6f45a904bf8ab4449"
+checksum = "e707fbbf255b8fc8c3b99abb91e7257a622caeb20a9818cbadbeeede4e0932ff"
 
 [[package]]
 name = "serde_derive"
-version = "1.0.104"
+version = "1.0.105"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "128f9e303a5a29922045a830221b8f78ec74a5f544944f3d5984f8ec3895ef64"
+checksum = "ac5d00fc561ba2724df6758a17de23df5914f20e41cb00f94d5b7ae42fffaff8"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -599,9 +599,9 @@ checksum = "39acde55a154c4cd3ae048ac78cc21c25f3a0145e44111b523279113dce0d94a"
 
 [[package]]
 name = "syn"
-version = "1.0.16"
+version = "1.0.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "123bd9499cfb380418d509322d7a6d52e5315f064fe4b3ad18a53d6b92c07859"
+checksum = "0df0eb663f387145cab623dea85b09c2c5b4b0aef44e945d928e682fce71bb03"
 dependencies = [
  "proc-macro2",
  "quote",
